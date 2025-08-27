@@ -1,1 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["32ZR2PWF2H.com.edwar.TopWords"],
+        "components": [
+          { "/": "/clip/*" }
+        ]
+      }
+    ]
+  },
+  "appclips": {
+    "apps": ["32ZR2PWF2H.com.edwar.TopWords.Clip"]
+  }
+}
 
