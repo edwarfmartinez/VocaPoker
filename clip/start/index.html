@@ -1,1 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Launching VocaPoker App Clip…</title>
+  <meta name="description" content="Try the VocaPoker App Clip — a fast demo that lets you play a round instantly." />
+
+  <!-- Smart App Banner & App Clip -->
+  <meta name="apple-itunes-app" content="app-id=6751200178, app-clip-bundle-id=com.edwar.TopWords.Clip">
+  <link rel="icon" href="/1024.png" />
+
+  <style>
+    :root{--navy:#0b1533;--ink:#0e1a47;--gold:#f5b301;--mint:#27d07d;--muted:#ffffffc0;--shadow:0 10px 30px rgba(0,0,0,.25)}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--navy);color:#fff;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    a{color:inherit;text-decoration:none}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#0e1a47 0%,#0b1533 60%)}
+    .hero-media{position:absolute;inset:0;z-index:0;pointer-events:none}
+    .hero-media::after{content:"";position:absolute;inset:0;background:
+      radial-gradient(100% 70% at 10% 0%,rgba(245,179,1,.18),transparent 40%),
+      linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.55) 85%)}
+    .hero-media img{width:100%;height:100%;object-fit:cover;opacity:.35;filter:saturate(1.05)}
+    .wrap{max-width:860px;margin:0 auto;padding:56px 20px;position:relative;z-index:1}
+
+    .brand{display:flex;align-items:center;gap:10px;opacity:.95}
+    .logo{width:40px;height:40px;border-radius:12px;box-shadow:var(--shadow)}
+    h1{margin:14px 0 8px;font-size:34px}
+    p{opacity:.9;margin:8px 0}
+
+    .card{background:#0f1c44;border:1px solid #1a2a63;border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+    .cta{display:inline-block;margin-top:14px;background:var(--mint);color:#081b12;font-weight:800;padding:12px 16px;border-radius:12px}
+    .note{display:block;margin-top:8px;color:var(--muted);font-size:14px}
+
+    /* Modal (QR for desktop / non-iOS) */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}
+    .modal.open{display:flex}
+    .sheet{background:#0f1c44;border:1px solid #1a2a63;border-radius:18px;max-width:640px;width:100%;padding:22px;box-shadow:var(--shadow)}
+    .qr{display:grid;place-items:center;margin:12px 0}
+    .qr img{width:220px;height:220px;border-radius:12px;background:#fff;padding:8px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{background:#ffffff12;border:1px solid #ffffff24;border-radius:12px;padding:10px 12px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="/VocaPokerClipImage.png" alt="VocaPoker artwork">
+    </div>
+    <div class="wrap">
+      <div class="brand">
+        <img class="logo" src="/1024.png" alt="VocaPoker icon" />
+        <strong>VocaPoker</strong>
+      </div>
+
+      <h1>Launching the App Clip…</h1>
+      <div class="card">
+        <p>If you’re on iPhone, Safari should show the <b>VocaPoker App Clip</b> card for this page. Tap <b>Open</b> to try a quick round.</p>
+        <a class="cta" id="open-clip" href="#">Open App Clip</a>
+        <small class="note">If nothing appears, make sure you’re using Safari on iOS and that the full app isn’t installed.</small>
+        <small class="note">Prefer the full app? <a href="https://apps.apple.com/app/id6751200178">Install on the App Store</a>.</small>
+      </div>
+    </div>
+  </header>
+
+  <!-- QR modal for desktop / non-iOS -->
+  <div class="modal" id="modal">
+    <div class="sheet">
+      <h2>Open on your iPhone</h2>
+      <p>Scan to launch the App Clip instantly.</p>
+      <div class="qr"><img id="qr" alt="QR code to VocaPoker App Clip"></div>
+      <div class="row">
+        <button class="chip" id="copy">Copy link</button>
+        <button class="chip" id="share">Share…</button>
+        <button class="chip" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const APPLE_CLIP_URL = 'https://appclip.apple.com/id?p=com.edwar.TopWords.Clip';
+
+    const btn = document.getElementById('open-clip');
+    const modal = document.getElementById('modal');
+    const qrImg = document.getElementById('qr');
+    const copyBtn = document.getElementById('copy');
+    const shareBtn = document.getElementById('share');
+    const closeBtn = document.getElementById('close');
+
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      if (isIOS) {
+        window.location.href = APPLE_CLIP_URL;
+      } else {
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(APPLE_CLIP_URL)}`;
+        modal.classList.add('open');
+      }
+    });
+
+    closeBtn.addEventListener('click', ()=> modal.classList.remove('open'));
+    modal.addEventListener('click', (e)=>{ if (e.target === modal) modal.classList.remove('open'); });
+
+    copyBtn.addEventListener('click', async ()=>{
+      try { await navigator.clipboard.writeText(APPLE_CLIP_URL);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(()=>copyBtn.textContent='Copy link', 1500);
+      } catch {}
+    });
+
+    shareBtn.addEventListener('click', async ()=>{
+      const data = { title:'VocaPoker App Clip', text:'Try the VocaPoker App Clip', url: APPLE_CLIP_URL };
+      if (navigator.share) { try { await navigator.share(data); } catch {} }
+      else { await navigator.clipboard.writeText(APPLE_CLIP_URL);
+        shareBtn.textContent = 'Link copied';
+        setTimeout(()=>shareBtn.textContent='Share…', 1500);
+      }
+    });
+  </script>
+</body>
+</html>
 
