@@ -5,234 +5,184 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VocaPoker — Learn vocabulary the fun way</title>
   <meta name="description" content="VocaPoker mixes classic poker mechanics with vocabulary training. Flip, compare, and master English & Spanish words in minutes." />
-
-  <!-- Smart App Banner + App Clip -->
-  <meta name="apple-itunes-app" content="app-id=6751200178, app-clip-bundle-id=com.edwar.TopWords.Clip">
-
-  <!-- Icons & Social previews -->
-  <link rel="icon" href="/1024.png">
-  <meta property="og:title" content="VocaPoker — Learn vocabulary the fun way" />
-  <meta property="og:description" content="A fast, playful way to build your English & Spanish vocabulary." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://vocapoker.edwarmartinez.com/" />
-  <meta property="og:image" content="/VocaPokerClipImage.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="1024.png">
 
   <style>
     :root{
-      --navy:#0b1533; --ink:#0e1a47; --gold:#f5b301; --orange:#ff9f1c;
-      --cream:#f2f3f5; --mint:#27d07d; --muted:#ffffffb8;
-      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --navy:#050c1f; --ink:#0c1c3d; --plum:#4e2a84; --teal:#3ef0b2;
+      --rose:#ff7f81; --gold:#ffc857; --slate:#a7b4d6; --card:#0f1a33;
+      --wrap: min(1080px, calc(100% - 32px));
+      font-family:"SF Pro Display", "Space Grotesk", system-ui;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--navy);color:#fff;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;background:var(--navy);color:#f5f6fb;font:16px/1.6 var(--font,system-ui);}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:var(--wrap);margin:0 auto}
 
-    /* HERO */
-    .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#0e1a47 0%,#0b1533 60%)}
-    .hero-media{position:absolute;inset:0;z-index:0;pointer-events:none}
-    .hero-media::after{content:"";position:absolute;inset:0;background:
-      radial-gradient(100% 70% at 10% 0%,rgba(255,159,28,.20),transparent 40%),
-      linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.55) 85%)}
-    .hero-media img{width:100%;height:100%;object-fit:cover;opacity:.35;filter:saturate(1.05)}
-    .hero .wrap{position:relative;z-index:1;padding:64px 24px 56px}
+    header.hero{position:relative;padding:72px 0 48px;overflow:hidden}
+    .hero::before,.hero::after{content:"";position:absolute;border-radius:999px;filter:blur(70px);opacity:.8}
+    .hero::before{width:420px;height:420px;background:radial-gradient(circle at 30% 40%,var(--teal),transparent 65%);
+      left:-60px;top:-120px;opacity:.6}
+    .hero::after{width:520px;height:520px;background:radial-gradient(circle at 70% 60%,var(--plum),transparent 70%);
+      right:-80px;top:40px;opacity:.5}
+    .hero-grid{display:grid;gap:32px;position:relative;z-index:1;padding:0 0 24px;
+      grid-template-columns:1fr;align-items:flex-start}
+    .app-icon{width:100px;height:100px;border-radius:28px;box-shadow:0 15px 35px rgba(0,0,0,.35);margin-bottom:18px}
+    .eyebrow{letter-spacing:.2em;text-transform:uppercase;font-size:13px;color:var(--slate);margin-bottom:12px}
+    h1{margin:0 0 16px;font-size:min(56px,12vw);line-height:1.05;color:#fff;white-space:nowrap}
+    .lead{color:#dfe4ff;margin:0 0 18px}
+    .cta{display:inline-flex;align-items:center;padding:10px 0}
+    .cta img{height:46px}
+    .hero-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:18px;align-items:center}
+    .hero-row .lead{margin:0;color:#dfe4ff}
+    .hero-row .cta-wrap{display:flex;justify-content:center}
+    .hero-row .cta{padding:0}
+    @media (max-width:640px){
+      h1{white-space:normal}
+      .hero-row{grid-template-columns:1fr;gap:16px}
+      .hero-row .cta{padding:10px 0}
+      .hero-row .cta-wrap{justify-content:flex-start}
+    }
 
-    .brand{display:flex;align-items:center;gap:12px;opacity:.98}
-    .logo-img{width:44px;height:44px;border-radius:12px;box-shadow:var(--shadow)}
-    h1{margin:18px 0 10px;font-size:44px;line-height:1.1}
-    .subtitle{max-width:780px;opacity:.92}
+    main{background:linear-gradient(180deg,rgba(9,17,34,.7),rgba(5,12,31,1));padding:16px 0 28px}
+    section{padding:20px 0}
+    .section-title{text-transform:uppercase;font-size:13px;letter-spacing:.3em;color:var(--slate);margin-bottom:12px}
+    .section-heading{margin:0 0 14px;font-size:34px}
+    .section-lead{color:#d0d8ff;margin:0 0 28px}
 
-    .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0 6px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:14px;font-weight:700;transition:.2s transform,.2s box-shadow}
-    .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
-    .btn.primary{background:var(--mint);color:#071b12}
-    .btn.secondary{background:#ffffff14;border:1px solid #ffffff2a}
-    .note{font-size:14px;color:var(--muted)}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .feature{padding:24px;border-radius:20px;background:rgba(7,13,29,.85);border:1px solid rgba(255,255,255,.06);
+      min-height:180px;display:flex;flex-direction:column;gap:12px}
+    .feature h3{margin:0;font-size:20px;color:#fff}
+    .feature p{margin:0;color:#b9c7f7}
 
-    /* inline how-to */
-    .how-inline{margin-top:10px;display:flex;flex-wrap:wrap;gap:10px;font-size:14px;opacity:.95}
-    .dot{opacity:.6}
+    .steps{display:grid;gap:18px}
+    .step{display:flex;gap:18px;background:rgba(7,13,29,.9);border:1px solid rgba(255,255,255,.05);padding:20px;border-radius:18px;align-items:flex-start}
+    .step span{width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.08);display:grid;place-items:center;font-weight:700;color:var(--gold)}
+    .step p{margin:0;color:#ccd6ff}
 
-    /* decorative cards */
-    .fan{display:flex;gap:16px;margin-top:36px;perspective:1200px}
-    .card{width:112px;height:160px;border-radius:16px;background:var(--cream);color:var(--ink);
-      display:grid;place-items:center;font-weight:900;font-size:34px;box-shadow:var(--shadow);
-      transform:rotate(calc(var(--i)*8deg)) translateY(calc(var(--i)*-6px));border:6px solid #19234e;position:relative}
-    .card small{color:#e2556a;font-size:18px;position:absolute;top:10px;right:10px}
+    .quote{background:linear-gradient(120deg,rgba(62,240,178,.15),rgba(255,127,129,.12));border-radius:28px;padding:40px;border:1px solid rgba(255,255,255,.08);
+      color:#fdfdfd;display:grid;gap:12px;box-shadow:0 20px 45px rgba(0,0,0,.4)}
+    .quote strong{font-size:22px}
+    .quote small{color:#fce9ff}
 
-    /* sections */
-    .section{background:#0f1c44}
-    .section.alt{background:#0e183b}
-    .section .wrap{padding:64px 24px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-    .feature{background:#0b1533;border:1px solid #1a2a63;border-radius:18px;padding:18px;box-shadow:var(--shadow)}
-    .feature h3{margin:8px 0 6px;color:var(--gold)}
-    .feature p{opacity:.88}
+    .bottom-cta{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;background:rgba(7,13,29,.9);
+      border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:28px}
 
-    /* QR modal (non-iOS) */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}
-    .modal.open{display:flex}
-    .sheet{background:#0f1c44;border:1px solid #1a2a63;border-radius:18px;max-width:640px;width:100%;padding:22px;box-shadow:var(--shadow)}
-    .sheet h2{margin:0 0 6px;font-size:22px}
-    .qr{display:grid;place-items:center;margin:12px 0}
-    .qr img{width:220px;height:220px;border-radius:12px;background:#fff;padding:8px}
-    .row{display:flex;gap:10px;flex-wrap:wrap}
-    .chip{background:#ffffff12;border:1px solid #ffffff24;border-radius:12px;padding:10px 12px;cursor:pointer}
-
-    /* footer */
-    footer{background:#0b1430;border-top:1px solid #1a2658}
-    footer .wrap{padding:28px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
-    .legal a{opacity:.8;margin-right:14px}
+    footer{padding:32px 0;color:#8993b8;font-size:14px}
 
     @media (max-width:640px){
-      h1{font-size:34px}
-      .fan{justify-content:center}
-      .card{width:96px;height:140px}
+      header.hero{padding:56px 0 24px}
+      h1{font-size:42px}
+      .step{flex-direction:column}
+      .bottom-cta{flex-direction:column;align-items:flex-start}
     }
   </style>
 </head>
 <body>
   <header class="hero">
-    <div class="hero-media" aria-hidden="true">
-      <img src="/VocaPokerClipImage.png" alt="VocaPoker preview artwork">
-    </div>
-    <div class="wrap">
-      <div class="brand">
-        <img class="logo-img" src="/1024.png" alt="VocaPoker icon">
-        <strong>VocaPoker</strong>
-      </div>
-
-      <h1>Poker-style gameplay that grows your vocabulary</h1>
-      <p class="subtitle">Flip cards, compare translations, and lock in new words. A fast, focused way to learn English & Spanish—one round at a time.</p>
-
-      <div class="cta-row">
-        <a class="btn primary" href="#" id="cta-clip" title="Try the App Clip on iPhone/iPad">▶︎ Try the demo (App Clip)</a>
-        <a class="btn secondary" href="https://apps.apple.com/app/id6751200178" id="cta-store"> Download on the App Store</a>
-      </div>
-
-      <div class="how-inline">
-        <div><strong>Play Cards:</strong> translate → flip to check</div>
-        <div class="dot">•</div>
-        <div><strong>Play Compare:</strong> match pairs (True/False)</div>
-        <div class="dot">•</div>
-        <div><strong>Score:</strong> track hits & fails</div>
-      </div>
-
-      <!-- decorative poker cards spelling VOCAB -->
-      <div class="fan" aria-hidden="true">
-        <div class="card" style="--i:-2">V<small>♥</small></div>
-        <div class="card" style="--i:-1">O<small>♥</small></div>
-        <div class="card" style="--i:0">C<small>♥</small></div>
-        <div class="card" style="--i:1">A<small>♥</small></div>
-        <div class="card" style="--i:2">B<small>♥</small></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Vocabulary + Poker</div>
+        <img class="app-icon" src="1024.png" alt="VocaPoker icon">
+        <h1>Master English & Spanish the playful way.</h1>
+        <div class="hero-row">
+          <p class="lead">VocaPoker turns translations into fast rounds of cards you can play anywhere. Flip, compare, and level up your vocabulary with game-night energy.</p>
+          <div class="cta-wrap">
+            <a class="cta" href="https://apps.apple.com/app/id6751200178">
+              <img src="Download.svg" alt="Download on the App Store">
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="grid">
-        <div class="feature">
-          <h3>Play Cards</h3>
-          <p>Mentally translate, flip to check, and keep score. Quick rounds make daily practice effortless.</p>
-        </div>
-        <div class="feature">
-          <h3>Play Compare</h3>
-          <p>Decide if a pair matches. The fast True/False mechanic builds recall and intuition.</p>
-        </div>
-        <div class="feature">
-          <h3>Smart Progress</h3>
-          <p>See hits & fails, focus on weak spots, and celebrate growth with clean, readable stats.</p>
-        </div>
-        <div class="feature">
-          <h3>Configurable</h3>
-          <p>Choose difficulty, practice only your misses, and play at your pace—anytime.</p>
+  <main>
+    <section>
+      <div class="wrap">
+        <p class="section-title">Why it works</p>
+        <h2 class="section-heading">Short bursts, big recall.</h2>
+        <p class="section-lead">VocaPoker combines poker instincts—risk, reveal, reward—with spaced repetition. Two modes keep sessions fresh and data keeps you improving.</p>
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>Play Cards</h3>
+            <p>Translate in your head, flip to reveal, and bank streaks. Perfect for solo sprints between commutes or classes.</p>
+          </article>
+          <article class="feature">
+            <h3>Play Compare</h3>
+            <p>Swipe through true/false pairs to rapidly verify recall. Micro-decisions train instinctive bilingual thinking.</p>
+          </article>
+          <article class="feature">
+            <h3>Smart Progress</h3>
+            <p>Spot weak spots instantly with hit/fail tracking and replay decks that adapt to what you miss.</p>
+          </article>
+          <article class="feature">
+            <h3>Configurable decks</h3>
+            <p>Pick difficulty, focus on verbs or nouns, or practice only the cards you flagged for review.</p>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section alt" id="how">
-    <div class="wrap">
-      <h2 style="margin-top:0">How it works</h2>
-      <div class="grid">
-        <div class="feature"><strong>1.</strong> Tap <em>Try the demo</em> to launch the App Clip.</div>
-        <div class="feature"><strong>2.</strong> Play a round—flip or compare cards to test your memory.</div>
-        <div class="feature"><strong>3.</strong> Track hits & fails; repeat to cement new words.</div>
-        <div class="feature"><strong>4.</strong> Install the full app for unlimited practice.</div>
+    <section>
+      <div class="wrap">
+        <p class="section-title">Play flow</p>
+        <h2 class="section-heading">From flip to fluent.</h2>
+        <div class="steps">
+          <div class="step">
+            <span>1</span>
+            <p>Choose a deck, glance at the prompt in English or Spanish, and predict the translation before flipping.</p>
+          </div>
+          <div class="step">
+            <span>2</span>
+            <p>Lock your answer. For Compare mode, mark each pair true or false to keep the streak alive.</p>
+          </div>
+          <div class="step">
+            <span>3</span>
+            <p>Review instant feedback with hits, fails, and time-on-card to decide where to double down.</p>
+          </div>
+          <div class="step">
+            <span>4</span>
+            <p>Replay your misses or jump into a fresh shuffled deck—daily reps take under two minutes.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section>
+      <div class="wrap bottom-cta">
+        <div>
+          <p class="section-title" style="margin-bottom:6px">Ready when you are</p>
+          <h2 class="section-heading" style="margin:0">Deal yourself a new language habit.</h2>
+          <div class="hero-row" style="margin-top:12px">
+            <p class="lead" style="margin:0;color:#dfe4ff">Download VocaPoker and start mixing English & Spanish vocabulary into your routine—no textbooks, just quick games.</p>
+            <div class="cta-wrap" style="justify-content:flex-end">
+              <a class="cta" href="https://apps.apple.com/app/id6751200178">
+                <img src="Download.svg" alt="Download on the App Store">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="wrap">
+    <div class="wrap" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
       <small>© <span id="y"></span> VocaPoker</small>
-      <div class="legal">
+      <div style="display:flex;gap:18px">
         <a href="/privacy.html">Privacy</a>
         <a href="mailto:edwarmartinez@yahoo.com">Support</a>
       </div>
     </div>
   </footer>
 
-  <!-- QR modal for desktop / non-iOS -->
-  <div class="modal" id="modal">
-    <div class="sheet">
-      <h2>Try the App Clip on your iPhone</h2>
-      <p>Scan this QR code with your iPhone camera to launch the VocaPoker App Clip.</p>
-      <div class="qr"><img id="qr" alt="QR code to open the VocaPoker App Clip"></div>
-      <div class="row">
-        <button class="chip" id="copy">Copy link</button>
-        <button class="chip" id="share">Share…</button>
-        <button class="chip" id="close">Close</button>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Year
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // App Clip link (works when build is approved)
-    const APPLE_CLIP_URL = 'https://appclip.apple.com/id?p=com.edwar.TopWords.Clip';
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const clipBtn = document.getElementById('cta-clip');
-
-    const modal = document.getElementById('modal');
-    const qrImg = document.getElementById('qr');
-    const copyBtn = document.getElementById('copy');
-    const shareBtn = document.getElementById('share');
-    const closeBtn = document.getElementById('close');
-
-    clipBtn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      if (isIOS) {
-        window.location.href = APPLE_CLIP_URL;
-      } else {
-        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(APPLE_CLIP_URL)}`;
-        modal.classList.add('open');
-      }
-    });
-
-    closeBtn.addEventListener('click', ()=> modal.classList.remove('open'));
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.classList.remove('open'); });
-
-    copyBtn.addEventListener('click', async ()=>{
-      try { await navigator.clipboard.writeText(APPLE_CLIP_URL);
-        copyBtn.textContent = 'Copied!'; setTimeout(()=>copyBtn.textContent='Copy link', 1500);
-      } catch {}
-    });
-
-    shareBtn.addEventListener('click', async ()=>{
-      const data = {title:'VocaPoker App Clip', text:'Try the VocaPoker App Clip', url: APPLE_CLIP_URL};
-      if (navigator.share) { try { await navigator.share(data); } catch {} }
-      else { await navigator.clipboard.writeText(APPLE_CLIP_URL);
-        shareBtn.textContent = 'Link copied'; setTimeout(()=>shareBtn.textContent='Share…', 1500);
-      }
-    });
   </script>
 
-  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -243,7 +193,7 @@
     "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
     "url":"https://vocapoker.edwarmartinez.com/",
     "downloadUrl":"https://apps.apple.com/app/id6751200178",
-    "image":"https://vocapoker.edwarmartinez.com/VocaPokerClipImage.png",
+    "image":"https://vocapoker.edwarmartinez.com/1024.png",
     "description":"Poker-style vocabulary training for English & Spanish."
   }
   </script>
